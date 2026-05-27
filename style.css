@@ -1267,4 +1267,28 @@ nav.scrolled .roll-link::after {
     backdrop-filter: blur(4px);
     border-radius: 50%;
   }
+  /* ── FIX: SHORTEN CURTAIN FOOTER FOR MOBILE ── */
+  .main-wrapper {
+    margin-bottom: 40vh; /* Cuts the blank space in half */
+  }
+  
+  .footer-curtain {
+    height: 40vh; /* Matches the wrapper */
+    padding: 30px 20px 20px; 
+  }
+  
+  .fc-massive {
+    font-size: 16vw; /* Scales the text dynamically to the screen width */
+    margin: 0 0 30px 0;
+  }
+  
+  .fc-bottom {
+    flex-direction: column; /* Stacks the links and copyright text */
+    gap: 20px;
+    padding-top: 20px;
+  }
+  
+  .fc-links {
+    gap: 20px;
+  }
 }
