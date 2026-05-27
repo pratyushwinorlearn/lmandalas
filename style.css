@@ -1179,6 +1179,11 @@ nav.scrolled .roll-link::after {
 /* ════════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
+
+  /* ── FIX: REVEAL HAMBURGER ON MOBILE ── */
+  .hamburger-btn { 
+    display: block !important; 
+  }
   
   /* ── 1. GLOBAL & NAV ── */
   nav { padding: 20px; }
