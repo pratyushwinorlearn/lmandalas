@@ -646,6 +646,7 @@ if (collectionsSection && slider) {
     requestAnimationFrame(animateSlider);
   }
   animateSlider();
+}
 
 
 
