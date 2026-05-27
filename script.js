@@ -635,16 +635,19 @@ if (collectionsSection && slider) {
   // Linear Interpolation (Lerp) for heavy, smooth physics
   // Linear Interpolation (Lerp) for heavy, smooth physics
   function animateSlider() {
-    // ONLY run the momentum script on desktop screens!
-    if (window.innerWidth > 768) {
-      currentX += (targetX - currentX) * 0.06; 
-      gsap.set(slider, { x: -currentX });
-    } else {
-      // On mobile, reset the transform so your finger can swipe it natively
+    // If on mobile, clear the transform and KILL the loop completely
+    if (window.innerWidth <= 768) {
       gsap.set(slider, { clearProps: "x" });
+      return; // 💥 This stops requestAnimationFrame from firing again!
     }
+    
+    // Otherwise, run the desktop momentum physics
+    currentX += (targetX - currentX) * 0.06; 
+    gsap.set(slider, { x: -currentX });
     requestAnimationFrame(animateSlider);
   }
+  
+  // Start the loop
   animateSlider();
 }
 

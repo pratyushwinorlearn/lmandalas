@@ -1221,6 +1221,7 @@ nav.scrolled .roll-link::after {
 
   /* ── FIX 1: NATIVE MOBILE SWIPE FOR COLLECTIONS ── */
   .collections-grid {
+    width: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
