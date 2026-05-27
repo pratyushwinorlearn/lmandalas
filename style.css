@@ -1129,6 +1129,20 @@ nav.scrolled .roll-link::after {
   aspect-ratio: 4/5; 
   z-index: 4; 
 }
+
+/* ── GUARANTEE CART DRAWER IS ON TOP ── */
+.cart-drawer, .cart-overlay {
+  z-index: 999999 !important; 
+}
+
+.cart-close, #cartClose {
+  font-size: 20px;
+  padding: 10px;
+  color: var(--black);
+  cursor: pointer;
+  pointer-events: auto !important;
+  z-index: 999999 !important;
+}
 /* ════════════════════════════════════════════════════════════ */
 /* ── MOBILE OPTIMIZATION (MAX WIDTH 768px) ── */
 /* ════════════════════════════════════════════════════════════ */
@@ -1204,4 +1218,53 @@ nav.scrolled .roll-link::after {
   .contact-title { font-size: 32px; }
   .contact-links { flex-direction: column; gap: 24px; }
   .footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
+
+  /* ── FIX 1: NATIVE MOBILE SWIPE FOR COLLECTIONS ── */
+  .collections-grid {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* This absolutely kills the desktop mouse-pan script so your finger works! */
+    transform: none !important; 
+    padding: 0 20px;
+  }
+  .collections-grid::-webkit-scrollbar { display: none; }
+  
+  .coll-card {
+    scroll-snap-align: center;
+    width: 80vw; /* Takes up most of the phone screen */
+    flex-shrink: 0; /* Prevents it from getting squished */
+  }
+
+  /* ── FIX 2: PRODUCT VIEW STACKING (UN-SQUISH IMAGE) ── */
+  .product-view-content {
+    flex-direction: column; /* Stacks image on top, text on bottom */
+    gap: 32px;
+    padding: 100px 20px 40px; /* Pushes content down so the Close X is reachable */
+    height: 100vh;
+    overflow-y: auto; /* Allows scrolling if description is long */
+  }
+
+  .product-view-img-wrap {
+    width: 100%;
+    max-width: 100%;
+    flex: none; /* Stops flexbox from crushing the aspect ratio */
+    height: auto;
+    aspect-ratio: 1/1; /* Gives the art a nice square frame on mobile */
+  }
+
+  .pv-title {
+    font-size: 36px;
+  }
+  
+  /* Make sure the close button is easily clickable on mobile */
+  .product-view-close {
+    top: 24px;
+    right: 24px;
+    padding: 12px;
+    background: rgba(245, 240, 235, 0.8);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+  }
 }

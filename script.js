@@ -820,21 +820,17 @@ if (headerCount) headerCount.textContent = count === 0 ? '0 items' : `${count} i
   });
 }
 
+// ── BULLETPROOF CART LOGIC ──
 function openCart() {
   document.getElementById('cartDrawer').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
-  gsap.set('#cartBtn', { x: 0, y: 0 });
-  document.getElementById('navbar').style.pointerEvents = 'none';
-  document.getElementById('navbar').style.zIndex = '50';
+  // Removed the hacky navbar z-index and pointer-events logic!
 }
+
 function closeCart() {
   document.getElementById('cartDrawer').classList.remove('open');
   document.getElementById('cartOverlay').classList.remove('open');
-  setTimeout(() => {
-    const nav = document.getElementById('navbar');
-    nav.style.pointerEvents = 'all';
-    nav.style.zIndex = '100';
-  }, 50);
+  // Removed the timeout and hacky navbar resets! 
 }
 
 document.getElementById('cartBtn').addEventListener('click', openCart);
