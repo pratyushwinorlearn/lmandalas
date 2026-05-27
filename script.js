@@ -1182,3 +1182,33 @@ if (toggleAuthMode) {
     toggleAuthMode.innerText = isSignUp ? 'Sign In.' : 'Create one.';
   });
 }
+
+// ── MOBILE MENU GSAP LOGIC ──
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const closeMenuBtn = document.getElementById('closeMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mmLinks = document.querySelectorAll('.mm-links a');
+
+if (mobileMenuBtn && mobileMenu) {
+  mobileMenuBtn.addEventListener('click', () => {
+    lenis.stop(); // Pauses background scrolling
+    const tl = gsap.timeline();
+    tl.set(mobileMenu, { visibility: 'visible' })
+      .to(mobileMenu, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, ease: 'power4.inOut' })
+      .to(mmLinks, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, "-=0.4");
+  });
+}
+
+if (closeMenuBtn) {
+  closeMenuBtn.addEventListener('click', () => {
+    const tl = gsap.timeline({ onComplete: () => lenis.start() });
+    tl.to(mobileMenu, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'power4.inOut' })
+      .set(mobileMenu, { visibility: 'hidden' })
+      .set(mmLinks, { opacity: 0, y: 20 });
+  });
+}
+
+// Auto-close the menu when a link is clicked
+mmLinks.forEach(link => {
+  link.addEventListener('click', () => closeMenuBtn.click());
+});

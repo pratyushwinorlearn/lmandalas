@@ -40,7 +40,38 @@ nav.scrolled .cart-count { background: var(--black); color: var(--cream); }
   text-shadow: 0px 4px 16px rgba(0, 0, 0, 0.6); /* Helps it pop over light video areas */
 }
 .nav-links { display: flex; gap: 36px; list-style: none; }
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger-btn {
+  display: none; /* Hidden on desktop */
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+  margin-left: 16px;
+}
+nav.scrolled .hamburger-btn {
+  color: var(--black);
+  text-shadow: none;
+}
 
+.mobile-menu {
+  position: fixed; inset: 0; background: var(--cream); z-index: 999999;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  clip-path: inset(0 0 100% 0); /* Hidden by default */
+  visibility: hidden;
+}
+.close-menu { 
+  position: absolute; top: 30px; right: 30px; font-size: 24px; 
+  background: none; border: none; cursor: pointer; color: var(--black); 
+}
+.mm-links { display: flex; flex-direction: column; gap: 32px; text-align: center; }
+.mm-links a { 
+  font-family: var(--serif); font-size: 32px; color: var(--black); 
+  text-decoration: none; text-transform: uppercase; 
+  opacity: 0; transform: translateY(20px); 
+}
 /* ── ROLLING TEXT LINKS ── */
 .roll-link {
   position: relative;
