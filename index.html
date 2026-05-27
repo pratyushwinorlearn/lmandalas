@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lmandalas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="cursor.css" />
+  <link rel="stylesheet" href="loader.css" />
+</head>
+<body>
+
+  <div class="preloader" id="preloader">
+    <div class="preloader-logo">Lmandalas</div>
+    <div class="preloader-line"><div class="preloader-progress" id="preloaderProgress"></div></div>
+    <div class="preloader-count" id="preloaderCount">0</div>
+  </div>
+
+  
+
+  <nav id="navbar">
+    <div class="nav-logo">Lmandalas</div>
+    <ul class="nav-links">
+      <li><a href="#about" class="magnetic roll-link" data-text="About"><span>About</span></a></li>
+      <li><a href="#collections" class="magnetic roll-link" data-text="Collections"><span>Collections</span></a></li>
+      <li><a href="#shop" class="magnetic roll-link" data-text="Shop"><span>Shop</span></a></li>
+      <li><a href="javascript:void(0)" class="magnetic roll-link" data-text="Contact" id="openContactBtn"><span>Contact</span></a></li>
+      <li><a href="javascript:void(0)" class="magnetic roll-link" data-text="Login" id="openLoginBtn"><span>Login</span></a></li>
+    </ul>
+    <button class="nav-cart magnetic" id="cartBtn">
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </nav>
+  <div class="main-wrapper">
+  <section class="hero" id="hero">
+    <video class="hero-video" id="mainHeroVideo" autoplay muted loop playsinline preload="metadata">
+      <source src="assets/videos/hero-bg.webm" type="video/webm">
+      <source src="assets/videos/hero-bg.mp4" type="video/mp4">
+    </video>
+    
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+      <p class="hero-eyebrow">Handcrafted mandala art</p>
+      <h1 class="hero-title">"Que <em>sera, sera"</em><br>Whatever will be, will be.</h1>
+      <p class="hero-sub">This little corner of the internet holds pieces of me — patterns drawn during quiet nights, colours chosen with feeling, and creations that started from simple doodles on paper.</p>
+      <a href="#collections" class="hero-cta magnetic">Explore collections →</a>
+    </div>
+    
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll</span>
+    </div>
+
+    <button id="videoToggleBtn" class="indigo-video-btn">
+      <span class="ivb-text">[ || ]</span>
+    </button>
+</section>
+  <section class="magnetic-gallery">
+    <h2 class="mg-title magnetic" style="z-index: 50; pointer-events: none;">GALLERY</h2>
+    
+    <div class="mg-item pos-1 magnetic"><img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779880251/533135717_18079163101939427_7591066530170929213_n_ze5f5y.jpg" alt="Art 1"></div>
+    <div class="mg-item pos-2 magnetic"><img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779880137/542848862_18080939380939427_3579979923024776384_n_uszi1y.jpg" alt="Art 2"></div>
+    <div class="mg-item pos-3 magnetic"><img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779880385/654987979_18095074759857725_9070220260819140398_n_cn2fej.jpg" alt="Art 3"></div>
+    <div class="mg-item pos-4 magnetic"><img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779880487/658861030_18335684710220495_1864188303066121976_n_pkvccg.jpg" alt="Art 4"></div>
+    <div class="mg-item pos-5 magnetic"><img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779880005/560484867_18084607078939427_8348524114617378428_n_t1skre.jpg" alt="Art 5"></div>
+    <div class="mg-item pos-6 magnetic"><img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779880732/651456596_18109428871753255_6698418433448689363_n_ef0asa.jpg" alt="Art 6"></div>
+    <div class="mg-item pos-7 magnetic"><img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779877781/607999085_18093127510939427_2784183555609417730_n_mflcho.jpg" alt="Art 7"></div>
+
+    <div class="mg-item pos-8 magnetic">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779881057/590418980_18091414150939427_6398641429681939686_n_g5zvvl.jpg" alt="Gap 1">
+    </div>
+
+    <div class="mg-item pos-9 magnetic">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779880606/622100418_18086292281131775_6797706179058628019_n_hooaxn.webp" alt="Gap 2">
+    </div>
+
+    <div class="mg-item pos-10 magnetic">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779881472/587276995_17842639584632185_7286254347921248401_n_nyvqvf.jpg" alt="Gap 3">
+    </div>
+
+    <div class="mg-item pos-11 magnetic">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779881489/589013797_17842639665632185_2094418058222649238_n_mgpxnk.jpg" alt="Gap 4">
+    </div>
+
+    <div class="mg-item pos-12 magnetic">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779881977/587045972_17842633947632185_1121210409679567093_n_r5k6vp.jpg" alt="Gap 5">
+    </div>
+
+    <div class="mg-item pos-13 magnetic">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779882185/525211577_18077016079939427_8850939701476030818_n_hxm5k2.jpg" alt="Gap 6">
+    </div>
+  </section>
+
+  
+  <section id="about" class="about-editorial">
+    <div class="editorial-dual-grid">
+
+      <div class="editorial-col col-left">
+        <div class="editorial-mask mask-left">
+          <img src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1500&auto=format&fit=crop" alt="Editorial Left" class="editorial-img img-up">
+        </div>
+        <div class="editorial-text">
+          <h3 class="ed-title">Meet the Artist</h3>
+          <p class="ed-desc">Hi, I’m Lakshita — an undergraduate student and the heart behind LMANDALAS.
+What began as tiny doodles in my notebook slowly grew into a dream that now lives here.
+
+I started making mandalas in 2020, during a time when life slowed down and I discovered peace in patterns, colors, and delicate details. What began as a simple hobby soon became the place that grounds me — a quiet corner where I could express myself and bring calm into chaos.
+
+LMANDALAS is my way of sharing that feeling with the world.
+Every piece you see here is created with intention, patience, and a touch of joy — art that speaks softly, brings comfort, and adds a little sunshine to someone’s day.
+
+I’m still learning, still exploring, and still growing. But every design reminds me that small beginnings can become something beautiful when created with heart.
+
+This shop is my first step — a small start filled with passion.
+Each handmade item and every pattern is crafted with care, a spark of boldness, and the hope that it becomes a timeless little companion in your world.
+
+Thank you for being here. I’m just getting started — and I can’t wait to fill this space with new creations, ideas, and handmade wonders.</p>
+        </div>
+      </div>
+
+      <div class="editorial-col col-right">
+        <div class="editorial-text">
+          <span class="ed-label">02 — The Process</span>
+          <h3 class="ed-title">Finding Stillness</h3>
+          <p class="ed-desc">A reflection of the inner universe captured on a physical plane. Hours of silence poured into a single, unrepeatable moment.</p>
+        </div>
+        <div class="editorial-mask mask-right">
+          <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779811160/WhatsApp_Image_2026-05-26_at_9.25.04_PM_1_t8b0ps.jpg" alt="Editorial Right" class="editorial-img img-down">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section class="poster-section">
+    <h4 class="poster-overlay-label" id="posterLabel">BEST WORK</h4>
+    
+    <img src="https://images.unsplash.com/photo-1542466500-dccb2789cbbb?q=80&w=2564&auto=format&fit=crop" alt="The Canvas" id="posterSource" style="display:none;">
+
+    <div class="poster-container" id="interactivePoster">
+      </div>
+  </section>
+  <section class="collections-section" id="collections">
+    <div class="section-header">
+      <h2 class="section-title split-text">Collections</h2>
+      <span class="section-count">08 items</span>
+      <div class="section-label">Drag to explore</div>
+    </div>
+    
+    <div class="collection-reveal-wrapper" id="collectionReveal">
+      </div>
+
+    <div class="collections-grid" id="collectionsGrid">
+      </div>
+  </section>
+
+  <div class="shop-aperture-wrapper" id="shopTrigger">
+    <section class="shop-section" id="shop">
+      
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px;">
+        <div>
+          <h2 class="section-title split-text">Shop</h2>
+          <span class="section-count" id="shopCount">0 original artworks</span>
+        </div>
+        
+        <div class="shop-sort">
+          <select id="sortDropdown" class="magnetic">
+            <option value="default">Sort: Recommended</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="az">Alphabetical: A-Z</option>
+            <option value="za">Alphabetical: Z-A</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="shop-grid" id="shopGrid"></div>
+    </section>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header" style="display:flex;align-items:center;justify-content:space-between;padding:28px 32px;border-bottom:0.5px solid rgba(8,8,8,0.08);">
+    <button id="cartClose" onclick="closeCart();" style="background:none;border:none;font-size:18px;cursor:pointer;color:#080808;padding:4px;z-index:99999;position:relative;line-height:1;">✕</button>
+    <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#080808;">Your Cart</h3>
+    <div style="width:26px;"></div>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter"></div>
+</div>
+
+  
+
+  <div class="product-view" id="productView">
+    <button class="product-view-close magnetic" id="closeProduct">Close ✕</button>
+    <div class="product-view-content">
+      <div class="product-view-img-wrap">
+        <img id="pvImage" src="" alt="Product">
+      </div>
+      <div class="product-view-info">
+        <p class="section-label" id="pvTag">Tag</p>
+        <h2 class="pv-title" id="pvName">Name</h2>
+        <p class="pv-price" id="pvPrice">Price</p>
+        <p class="pv-desc">A handcrafted piece of sacred geometry. Drawn with intention, designed for stillness. There is only one in existence.</p>
+        <button class="add-to-cart pv-add-btn" id="pvAddBtn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-modal" id="contactModal">
+    <div class="cm-left">
+      <button id="closeContactBtn" onclick="document.getElementById('contactModal').style.visibility='hidden';gsap.to('#contactModal',{clipPath:'inset(100% 0 0 0)',duration:1,ease:'power4.inOut',onComplete:()=>{lenis.start()}})" style="position:absolute;top:80px;left:48px;background:none;border:none;font-size:16px;cursor:pointer;color:#080808;letter-spacing:0.1em;z-index:99999;pointer-events:all;">[ × ]</button>
+      <h2 class="cm-title">YOUR STORY,<br>YOUR PIECE!</h2>
+      <p class="cm-desc">If what you've seen speaks to you, let's create something that tells your story. Write to me: your unique mandala can start here.</p>
+      <div class="cm-actions">
+        <a href="mailto:hello@lmandalas.com" class="cm-btn">LET'S TALK</a>
+        <a href="javascript:void(0)" class="cm-btn cm-btn-outline" id="cmShopBtn">SHOP ONLINE</a>
+      </div>
+      <div class="cm-socials">
+        <a href="#" class="magnetic">WHATSAPP</a>
+        <a href="#" class="magnetic">INSTAGRAM</a>
+      </div>
+    </div>
+    <div class="cm-right">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779877449/584408282_17845574103632185_5617086102858201115_n_jfwgeb.jpg" alt="The Maker">
+    </div>
+  </div>
+</div>
+<div class="login-modal" id="loginModal">
+    <div class="cm-left">
+      <button id="closeLoginBtn" class="cm-close" style="position:absolute; top:80px; left:48px; background:none; border:none; font-size:16px; cursor:pointer; color:#080808; letter-spacing:0.1em; z-index:99999; pointer-events:all;">[ × ]</button>
+      
+      <div id="authFormContainer">
+        <h2 class="cm-title" id="authTitle">ACCESS<br>THE VAULT</h2>
+        <p class="cm-desc" id="authDesc">Enter your credentials to access your original pieces and track your orders.</p>
+        
+        <form id="authForm" class="auth-form">
+          <div class="input-group">
+            <input type="email" id="authEmail" placeholder="EMAIL ADDRESS" required>
+          </div>
+          <div class="input-group">
+            <input type="password" id="authPassword" placeholder="PASSWORD" required>
+          </div>
+          
+          <div class="cm-actions" style="margin-top: 32px; flex-direction: column; gap: 16px;">
+            <button type="submit" class="cm-btn" id="authSubmitBtn" style="width: 100%; border: none; cursor: pointer;">SIGN IN</button>
+            <p class="auth-toggle-text">
+              <span id="authToggleQuestion">Don't have an account?</span> 
+              <a href="javascript:void(0)" id="toggleAuthMode" style="color: var(--black); font-weight: 700;">Create one.</a>
+            </p>
+          </div>
+          <p id="authErrorMessage" class="auth-error"></p>
+        </form>
+      </div>
+
+      <div id="loggedInContainer" style="display: none; margin-top: 40px;">
+        <h2 class="cm-title">WELCOME<br>BACK</h2>
+        <p class="cm-desc" id="loggedInUserEmail" style="text-transform: uppercase; letter-spacing: 0.1em;">user@email.com</p>
+        
+        <div class="cm-actions" style="margin-top: 48px; flex-direction: column; gap: 16px; max-width: 400px;">
+          <button id="logoutBtn" class="cm-btn" style="width: 100%; border: none; cursor: pointer;">LOG OUT</button>
+          <button id="resetPasswordBtn" class="cm-btn cm-btn-outline" style="width: 100%; cursor: pointer;">RESET PASSWORD</button>
+        </div>
+        <p id="accountMessage" class="auth-error" style="color: var(--black); margin-top: 24px;"></p>
+      </div>
+
+    </div>
+    
+    <div class="cm-right">
+      <img src="https://res.cloudinary.com/duvvzolyf/image/upload/v1779873853/Karigari_This_piece_made_me_realise_the_art_of_slowing_down_and_recovery_sometimes_the_best_thi_s0oirk.jpg" alt="The Vault">
+    </div>
+  </div>
+  <footer class="footer-curtain">
+    <div class="fc-content">
+      <h2 class="fc-massive magnetic">LMANDALAS</h2>
+      <div class="fc-bottom">
+        <div class="fc-links">
+          <a href="#" class="magnetic">INSTAGRAM</a>
+          <a href="#" class="magnetic">WHATSAPP</a>
+          <a href="#" class="magnetic">EMAIL</a>
+        </div>
+        <p>© 2026 — BUILT WITH INTENTION</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hover-effect@1.0.0/dist/hover-effect.umd.js"></script>
+  <script>
+  function closeCart() {
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
