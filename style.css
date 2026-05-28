@@ -1238,6 +1238,16 @@ nav.scrolled .roll-link::after {
 
 @media (max-width: 768px) {
 
+  /* Force the new mobile display order (1 to 6) */
+  .hero { order: 1; }
+  .poster-section { order: 2; }
+  .collections-section { order: 3; }
+  .shop-aperture-wrapper { order: 4; }
+  
+  /* Pushed to the absolute bottom! */
+  .magnetic-gallery { order: 5; }
+  .about-editorial { order: 6; }
+
   /* ── FIX: REVEAL HAMBURGER ON MOBILE ── */
   .hamburger-btn { 
     display: block !important; 
