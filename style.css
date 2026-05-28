@@ -176,9 +176,10 @@ nav.scrolled .roll-link::after {
   margin-right: auto;
 }
 
-/* 5. CTA: Pure White + Shadow */
 .hero-cta {
-  position: relative; z-index: 2;
+  position: relative; 
+  z-index: 50 !important; /* 💥 FORCES button completely above the video overlay */
+  pointer-events: auto !important; /* 💥 GUARANTEES the browser registers the click */
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
   color: #ffffff; 
