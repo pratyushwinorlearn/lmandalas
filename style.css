@@ -1212,6 +1212,26 @@ nav.scrolled .roll-link::after {
   font-size: 16px;
   color: var(--black);
 }
+/* ── FIX: ALWAYS VISIBLE COLLECTION NAMES ── */
+.coll-card-overlay { 
+  opacity: 1 !important; /* Permanently turns on the dark gradient */
+  background: linear-gradient(to top, rgba(8,8,8,0.75) 0%, transparent 50%) !important; 
+  transition: background 0.4s;
+}
+
+/* Darken the gradient slightly when hovered on laptop for a premium feel */
+.coll-card:hover .coll-card-overlay {
+  background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, transparent 60%) !important;
+}
+
+.coll-card-info { 
+  transform: translateY(0) !important; /* Locks the text in its final position */
+}
+
+.coll-card-name { 
+  opacity: 1 !important; /* Permanently reveals the text */
+  text-shadow: 0px 2px 8px rgba(0,0,0,0.5); /* Adds a shadow so it pops against white backgrounds */
+}
 /* ════════════════════════════════════════════════════════════ */
 /* ── MOBILE OPTIMIZATION (MAX WIDTH 768px) ── */
 /* ════════════════════════════════════════════════════════════ */

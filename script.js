@@ -845,7 +845,8 @@ if (headerCount) headerCount.textContent = count === 0 ? '0 items' : `${count} i
   }
   itemsEl.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div class="cart-item-img" style="background:#e8e2d9;width:64px;height:64px;"></div>
+      <img class="cart-item-img" src="${item.image || 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=200&q=80'}" alt="${item.name}" style="width: 64px; height: 64px; object-fit: cover; border-radius: 4px; background: #e8e2d9; flex-shrink: 0;">
+      
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')} × ${item.qty}</div>
