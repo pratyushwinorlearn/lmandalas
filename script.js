@@ -1208,7 +1208,26 @@ if (closeMenuBtn) {
   });
 }
 
-// Auto-close the menu when a link is clicked
+// ── FIX: MOBILE MENU CLICK LOGIC ──
 mmLinks.forEach(link => {
-  link.addEventListener('click', () => closeMenuBtn.click());
+  link.addEventListener('click', () => {
+    lenis.start(); // CRITICAL: Unfreeze the page immediately so scrolling works!
+    closeMenuBtn.click(); // Trigger the close animation
+  });
 });
+
+// Wire up the mobile Contact and Login buttons to trigger the desktop modals
+const mobileContactBtn = document.getElementById('mobileContactBtn');
+if (mobileContactBtn) {
+  mobileContactBtn.addEventListener('click', () => {
+    // Adds a tiny delay so the menu starts closing before the modal pops up
+    setTimeout(() => document.getElementById('openContactBtn').click(), 200); 
+  });
+}
+
+const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+if (mobileLoginBtn) {
+  mobileLoginBtn.addEventListener('click', () => {
+    setTimeout(() => document.getElementById('openLoginBtn').click(), 200);
+  });
+}
