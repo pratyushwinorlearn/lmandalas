@@ -1194,7 +1194,7 @@ nav.scrolled .roll-link::after {
   /* ── 2. HERO SECTION ── */
   .hero-content { padding: 0 16px; }
   .hero-title { 
-    font-size: 42px; /* Overrides the massive desktop math */
+    font-size: 42px; 
     line-height: 1.1; 
   }
   .hero-sub { font-size: 11px; max-width: 100%; }
@@ -1202,29 +1202,52 @@ nav.scrolled .roll-link::after {
   /* Tuck the video button into the corner safely */
   .indigo-video-btn { bottom: 20px; right: 20px; padding: 10px; }
 
-  /* ── 3. SHOP & COLLECTIONS ── */
+  /* ── 3. SHOP & COLLECTIONS (UPDATED FOR 2-COLUMN) ── */
   .collections-section { padding: 0 0 60px; }
   .section-header { flex-direction: column; align-items: flex-start; gap: 12px; padding: 30px 20px 0; margin-bottom: 24px; }
   .section-title { font-size: 32px; }
   
-  /* Convert 4-column shop to a clean 1-column mobile feed */
-  .shop-section { padding: 60px 20px; clip-path: inset(0); transform: scale(1); }
-  .shop-grid { grid-template-columns: 1fr; gap: 40px; }
+  /* OVERRIDE THE INLINE HTML STYLES FOR THE SHOP HEADER */
+  .shop-section .section-header {
+    align-items: flex-start !important; 
+  }
+
+  .shop-section { padding: 40px 20px; clip-path: inset(0); transform: scale(1); }
+  
+  /* 💥 CONVERT TO 2-COLUMN GRID 💥 */
+  .shop-grid { 
+    grid-template-columns: repeat(2, 1fr) !important; 
+    gap: 16px !important; /* Tighter gap so the images stay large */
+  }
+
+  /* Shrink card typography so it fits perfectly side-by-side on narrow phones */
+  .shop-card-name { 
+    font-size: 13px; 
+    margin-bottom: 4px;
+  }
+  .shop-card-price { 
+    font-size: 11px; 
+    margin-bottom: 10px;
+  }
+  .add-to-cart {
+    font-size: 9px;
+    padding: 10px 4px;
+    letter-spacing: 0.1em; /* Keeps the button text from wrapping */
+  }
 
   /* ── 4. THE GALLERY (SWIPEABLE CAROUSEL) ── */
   .magnetic-gallery {
-    height: auto; /* Kills the 100vh lock */
-    padding: 100px 20px 60px; /* Space for the title */
+    height: auto; 
+    padding: 100px 20px 60px; 
     display: flex;
-    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-x: auto; 
     overflow-y: hidden;
-    scroll-snap-type: x mandatory; /* The magic snapping physics */
+    scroll-snap-type: x mandatory; 
     gap: 16px;
-    -webkit-overflow-scrolling: touch; /* Buttery smooth iOS scrolling */
-    scrollbar-width: none; /* Hides scrollbar on Firefox */
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: none; 
   }
   
-  /* Hides scrollbar on Chrome/Safari */
   .magnetic-gallery::-webkit-scrollbar { display: none; }
 
   .mg-title {
@@ -1235,45 +1258,44 @@ nav.scrolled .roll-link::after {
     z-index: 10;
   }
 
-  /* Strip the absolute positioning and force them into cards */
   .mg-item {
     position: relative !important;
     left: auto !important; right: auto !important;
     top: auto !important; bottom: auto !important;
-    flex: 0 0 80vw; /* Each card takes up 80% of the screen width */
-    height: 60vh; /* Uniform height */
+    flex: 0 0 80vw; 
+    height: 60vh; 
     width: auto !important;
     aspect-ratio: auto !important;
-    scroll-snap-align: center; /* Snaps the image to the middle of the screen */
-    z-index: 1 !important; /* Kills the crazy desktop layering */
-    border-radius: 8px; /* Optional: slight curve for app-like feel */
+    scroll-snap-align: center; 
+    z-index: 1 !important; 
+    border-radius: 8px; 
   }
+
   /* ── FIX: CONTACT & LOGIN MODALS ON MOBILE ── */
   .contact-modal, .login-modal {
-    flex-direction: column; /* Stacks text on top, image on bottom */
-    overflow-y: auto; /* Allows the user to scroll if the content is long */
+    flex-direction: column; 
+    overflow-y: auto; 
   }
 
   .cm-left {
-    padding: 80px 24px 40px !important; /* Kills the massive 100px desktop padding */
-    flex: none; /* Stops it from trying to be 50% height */
+    padding: 80px 24px 40px !important; 
+    flex: none; 
     min-height: auto;
   }
 
   .cm-right {
     flex: none;
     width: 100%;
-    height: 50vh; /* Gives the photo a massive, beautiful half-screen block */
+    height: 50vh; 
   }
 
-  /* Overrides the inline HTML styles for the close buttons on mobile */
   .cm-close, #closeContactBtn, #closeLoginBtn {
     top: 24px !important;
     left: 24px !important;
   }
 
   .cm-title {
-    font-size: 38px !important; /* Scales down the massive text */
+    font-size: 38px !important; 
     margin-bottom: 24px;
   }
 
@@ -1295,7 +1317,6 @@ nav.scrolled .roll-link::after {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    /* This absolutely kills the desktop mouse-pan script so your finger works! */
     transform: none !important; 
     padding: 0 20px;
   }
@@ -1303,32 +1324,31 @@ nav.scrolled .roll-link::after {
   
   .coll-card {
     scroll-snap-align: center;
-    width: 80vw; /* Takes up most of the phone screen */
-    flex-shrink: 0; /* Prevents it from getting squished */
+    width: 80vw; 
+    flex-shrink: 0; 
   }
 
   /* ── FIX 2: PRODUCT VIEW STACKING (UN-SQUISH IMAGE) ── */
   .product-view-content {
-    flex-direction: column; /* Stacks image on top, text on bottom */
+    flex-direction: column; 
     gap: 32px;
-    padding: 100px 20px 40px; /* Pushes content down so the Close X is reachable */
+    padding: 100px 20px 40px; 
     height: 100vh;
-    overflow-y: auto; /* Allows scrolling if description is long */
+    overflow-y: auto; 
   }
 
   .product-view-img-wrap {
     width: 100%;
     max-width: 100%;
-    flex: none; /* Stops flexbox from crushing the aspect ratio */
+    flex: none; 
     height: auto;
-    aspect-ratio: 1/1; /* Gives the art a nice square frame on mobile */
+    aspect-ratio: 1/1; 
   }
 
   .pv-title {
     font-size: 36px;
   }
   
-  /* Make sure the close button is easily clickable on mobile */
   .product-view-close {
     top: 24px;
     right: 24px;
@@ -1337,23 +1357,24 @@ nav.scrolled .roll-link::after {
     backdrop-filter: blur(4px);
     border-radius: 50%;
   }
+
   /* ── FIX: SHORTEN CURTAIN FOOTER FOR MOBILE ── */
   .main-wrapper {
-    margin-bottom: 40vh; /* Cuts the blank space in half */
+    margin-bottom: 40vh; 
   }
   
   .footer-curtain {
-    height: 40vh; /* Matches the wrapper */
+    height: 40vh; 
     padding: 30px 20px 20px; 
   }
   
   .fc-massive {
-    font-size: 16vw; /* Scales the text dynamically to the screen width */
+    font-size: 16vw; 
     margin: 0 0 30px 0;
   }
   
   .fc-bottom {
-    flex-direction: column; /* Stacks the links and copyright text */
+    flex-direction: column; 
     gap: 20px;
     padding-top: 20px;
   }
