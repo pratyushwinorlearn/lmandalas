@@ -1426,8 +1426,10 @@ nav.scrolled .roll-link::after {
     border-radius: 50%;
   }
 
-  /* ── FIX: SHORTEN CURTAIN FOOTER FOR MOBILE ── */
+  /* ── FIX: SHORTEN CURTAIN FOOTER FOR MOBILE & ACTIVATE REORDERING ── */
   .main-wrapper {
+    display: flex;             /* 💥 CRITICAL: Turns on the Flexbox engine */
+    flex-direction: column;    /* 💥 CRITICAL: Stacks the sections vertically */
     margin-bottom: 40vh; 
   }
   
