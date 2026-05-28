@@ -1419,4 +1419,9 @@ nav.scrolled .roll-link::after {
   .fc-links {
     gap: 20px;
   }
+
+  /* ── FIX: GOLIATH POSTER STRETCHING ── */
+  .poster-section {
+    height: 75vh; /* Cuts the massive 150vh height in half for mobile */
+  }
 }
