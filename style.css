@@ -1248,6 +1248,39 @@ nav.scrolled .roll-link::after {
     z-index: 1 !important; /* Kills the crazy desktop layering */
     border-radius: 8px; /* Optional: slight curve for app-like feel */
   }
+  /* ── FIX: CONTACT & LOGIN MODALS ON MOBILE ── */
+  .contact-modal, .login-modal {
+    flex-direction: column; /* Stacks text on top, image on bottom */
+    overflow-y: auto; /* Allows the user to scroll if the content is long */
+  }
+
+  .cm-left {
+    padding: 80px 24px 40px !important; /* Kills the massive 100px desktop padding */
+    flex: none; /* Stops it from trying to be 50% height */
+    min-height: auto;
+  }
+
+  .cm-right {
+    flex: none;
+    width: 100%;
+    height: 50vh; /* Gives the photo a massive, beautiful half-screen block */
+  }
+
+  /* Overrides the inline HTML styles for the close buttons on mobile */
+  .cm-close, #closeContactBtn, #closeLoginBtn {
+    top: 24px !important;
+    left: 24px !important;
+  }
+
+  .cm-title {
+    font-size: 38px !important; /* Scales down the massive text */
+    margin-bottom: 24px;
+  }
+
+  .cm-desc {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
 
   /* ── 5. CONTACT & FOOTER ── */
   .contact-section { padding: 80px 20px; }
