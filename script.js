@@ -198,7 +198,7 @@ function fetchProducts() {
 
       // Now that data is loaded, build the grids
       buildCollections();
-      buildShop();
+      renderShop();
     }
   });
 }
@@ -252,14 +252,17 @@ function buildCollections() {
   });
 
   // ── ATTACH THE FILTER CLICKS ──
+  // ── ATTACH THE FILTER CLICKS ──
   document.querySelectorAll('.category-card').forEach(card => {
     card.addEventListener('click', () => {
-      const selectedCat = card.dataset.category;
+      // 1. Update the global state
+      currentCategory = card.dataset.category;
+      currentPage = 1; // Always reset to page 1 when changing categories!
       
-      // 1. Filter the shop grid
-      filterShop(selectedCat);
+      // 2. Re-render the shop with the new filters
+      renderShop();
       
-      // 2. Smooth scroll down to the shop section!
+      // 3. Smooth scroll down to the shop section
       const shopSection = document.getElementById('shop');
       if (shopSection) {
         lenis.scrollTo(shopSection, { offset: -80, duration: 1.2 });
@@ -267,54 +270,53 @@ function buildCollections() {
     });
   });
 }
-// ── SHOP FILTERING ENGINE ──
-function filterShop(category) {
-  const allCards = document.querySelectorAll('.shop-card');
-  let visibleCount = 0;
 
-  allCards.forEach(card => {
-    const productId = parseInt(card.dataset.id);
-    const product = products.find(p => p.id === productId);
-    
-    // If they clicked "All Artworks" OR if the product tag matches the clicked category
-    if (category === "All Artworks" || product.tag === category) {
-      card.style.display = 'block';
-      // Add a tiny GSAP pop-in animation so it feels premium
-      gsap.fromTo(card, 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
-      );
-      visibleCount++;
-    } else {
-      // Hide the products that don't match
-      card.style.display = 'none';
-    }
+// ── MASTER SHOP ENGINE (PAGINATION, SORTING, FILTERING) ──
+
+// 1. Global State Variables
+let currentPage = 1;
+const ITEMS_PER_PAGE = 12;
+let currentCategory = "All Artworks";
+let currentSort = "default";
+
+function renderShop() {
+  const shopGrid = document.getElementById('shopGrid');
+  shopGrid.innerHTML = ''; // Clear the board
+
+  // --- A. FILTERING ---
+  let filtered = products.filter(p => p.available);
+  if (currentCategory !== "All Artworks") {
+    filtered = filtered.filter(p => p.tag === currentCategory);
+  }
+
+  // --- B. SORTING ---
+  filtered.sort((a, b) => {
+    if (currentSort === 'price-low') return a.price - b.price;
+    if (currentSort === 'price-high') return b.price - a.price;
+    if (currentSort === 'az') return a.name.localeCompare(b.name);
+    if (currentSort === 'za') return b.name.localeCompare(a.name);
+    return 0; 
   });
 
-  // Update the text counter at the top of the shop
-  const countEl = document.getElementById('shopCount');
-  if(countEl) {
-    countEl.textContent = `${visibleCount} ${category === "All Artworks" ? "original artworks" : category}`;
-  }
-}
-
-// ── BUILD SHOP & SORTING ENGINE ──
-// ── BUILD SHOP & SORTING ENGINE ──
-function buildShop() {
-  const shopGrid = document.getElementById('shopGrid');
-  shopGrid.innerHTML = ''; 
-  
   // Update section count
   const countEl = document.getElementById('shopCount');
-  if(countEl) countEl.textContent = `${products.length} original artworks`;
+  if(countEl) {
+    countEl.textContent = `${filtered.length} ${currentCategory === "All Artworks" ? "original artworks" : currentCategory}`;
+  }
 
-  products.forEach(p => {
-    if (!p.available) return; // Instantly hides anything marked 'no' in your sheet
+  // --- C. PAGINATION MATH ---
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE) || 1;
+  if (currentPage > totalPages) currentPage = totalPages; // Failsafe
 
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedProducts = filtered.slice(startIndex, endIndex);
+
+  // --- D. RENDER CARDS ---
+  paginatedProducts.forEach(p => {
     const card = document.createElement('div');
     card.className = 'shop-card';
     card.dataset.id = p.id;
-    // CRITICAL FIX: Ensures the absolute-positioned SALE badge stays inside the card
     card.style.position = 'relative'; 
     
     const imgWrap = document.createElement('div');
@@ -322,9 +324,7 @@ function buildShop() {
     imgWrap.id = `liquid-${p.id}`;
     card.appendChild(imgWrap);
     
-    // ── NEW DYNAMIC PRICE & SALE LOGIC ──
     let priceHTML = `<div class="shop-card-price">₹${p.originalPrice.toLocaleString('en-IN')}</div>`;
-
     if (p.isOnSale) {
       priceHTML = `
         <div class="shop-card-price on-sale">
@@ -344,7 +344,6 @@ function buildShop() {
       ${priceHTML}
       <button class="add-to-cart" data-id="${p.id}">Add to Cart</button>
     `);
-    // ──────────────────────────────────────
 
     shopGrid.appendChild(card);
 
@@ -364,34 +363,71 @@ function buildShop() {
     });
   });
 
-  // ── FLAWLESS CSS SORTING ──
-  const sortDropdown = document.getElementById('sortDropdown');
-  if (sortDropdown) {
-    sortDropdown.addEventListener('change', (e) => {
-      const val = e.target.value;
-      const cards = Array.from(document.querySelectorAll('.shop-card'));
-      
-      cards.sort((a, b) => {
-        const prodA = products.find(p => p.id === parseInt(a.dataset.id));
-        const prodB = products.find(p => p.id === parseInt(b.dataset.id));
-        
-        // This inherently uses the active `p.price` (which is the sale price if on sale, or original if not)
-        if (val === 'price-low') return prodA.price - prodB.price;
-        if (val === 'price-high') return prodB.price - prodA.price;
-        if (val === 'az') return prodA.name.localeCompare(prodB.name);
-        if (val === 'za') return prodB.name.localeCompare(prodA.name);
-        return 0; 
-      });
+  // Add GSAP stagger to smoothly pop the new cards in
+  gsap.fromTo('.shop-card', 
+    { opacity: 0, y: 20 }, 
+    { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: "power2.out" }
+  );
 
-      // Visually re-arranges the grid without deleting the HTML!
-      cards.forEach((card, index) => {
-        card.style.order = index; 
-      });
+  // --- E. RENDER PAGINATION UI ---
+  buildPaginationUI(totalPages);
+  
+  // Refresh scroll calculations
+  setTimeout(() => ScrollTrigger.refresh(), 300);
+}
 
-      // Refresh scroll calculations
-      setTimeout(() => ScrollTrigger.refresh(), 300);
-    });
-  }
+// ── PAGINATION UI BUILDER ──
+function buildPaginationUI(totalPages) {
+  // Remove old pagination if it exists
+  const oldPag = document.getElementById('shopPagination');
+  if (oldPag) oldPag.remove();
+
+  // If only 1 page, don't show controls
+  if (totalPages <= 1) return;
+
+  const pagContainer = document.createElement('div');
+  pagContainer.id = 'shopPagination';
+  pagContainer.className = 'shop-pagination';
+  
+  // Prev Button
+  const prevBtn = document.createElement('button');
+  prevBtn.innerText = '← Prev';
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.onclick = () => { 
+    currentPage--; 
+    renderShop(); 
+    lenis.scrollTo(document.getElementById('shopTrigger'), { offset: -50, duration: 0.8 }); 
+  };
+  pagContainer.appendChild(prevBtn);
+
+  // Page Numbers
+  const info = document.createElement('span');
+  info.innerText = `${currentPage} / ${totalPages}`;
+  pagContainer.appendChild(info);
+
+  // Next Button
+  const nextBtn = document.createElement('button');
+  nextBtn.innerText = 'Next →';
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.onclick = () => { 
+    currentPage++; 
+    renderShop(); 
+    lenis.scrollTo(document.getElementById('shopTrigger'), { offset: -50, duration: 0.8 }); 
+  };
+  pagContainer.appendChild(nextBtn);
+
+  // Add the controls directly under the shop grid
+  document.getElementById('shop').appendChild(pagContainer);
+}
+
+// ── HOOK UP THE SORT DROPDOWN ──
+const sortDropdown = document.getElementById('sortDropdown');
+if (sortDropdown) {
+  sortDropdown.addEventListener('change', (e) => {
+    currentSort = e.target.value;
+    currentPage = 1; // Reset to page 1 when sorting
+    renderShop();
+  });
 }
 // ── PRODUCT VIEW LOGIC ──
 const productView = document.getElementById('productView');
