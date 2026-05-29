@@ -985,10 +985,10 @@ if (cmShopBtn) {
 gsap.registerPlugin(ScrollTrigger);
 
 const initClothRipplePoster = () => {
-  const imageSource = document.getElementById('posterSource');
   const canvasContainer = document.getElementById('interactivePoster');
 
-  if (!imageSource || !canvasContainer || typeof THREE === 'undefined') return;
+  // 💥 FIX 1: Removed the imageSource check so it doesn't kill the script!
+  if (!canvasContainer || typeof THREE === 'undefined') return;
 
   const scene = new THREE.Scene();
   
@@ -1022,7 +1022,32 @@ const initClothRipplePoster = () => {
 
   const textureLoader = new THREE.TextureLoader();
   textureLoader.setCrossOrigin('anonymous'); 
-  const texture = textureLoader.load(imageSource.src);
+  
+  // 💥 FIX 2: Hardcode the URL directly into the engine
+  const imgUrl = 'https://res.cloudinary.com/duvvzolyf/image/upload/q_auto,f_auto,c_fill,w_1080,h_1620,g_auto/v1779873853/Karigari_This_piece_made_me_realise_the_art_of_slowing_down_and_recovery_sometimes_the_best_thi_s0oirk.jpg';
+
+  const texture = textureLoader.load(imgUrl, (tex) => {
+    // 💥 FIX 3: THE GPU LIFESAVER! Forces mobile WebGL to accept non-square images.
+    tex.minFilter = THREE.LinearFilter;
+    tex.generateMipmaps = false;
+
+    // The Object-Fit Math
+    function updateTextureMatrix() {
+      const imageAspect = tex.image.width / tex.image.height;
+      const containerAspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
+      
+      tex.matrixAutoUpdate = false;
+      
+      if (containerAspect > imageAspect) {
+        tex.matrix.setUvTransform(0, 0, 1, imageAspect / containerAspect, 0, 0.5, 0.5);
+      } else {
+        tex.matrix.setUvTransform(0, 0, containerAspect / imageAspect, 1, 0, 0.5, 0.5);
+      }
+    }
+    
+    updateTextureMatrix();
+    window.addEventListener('resize', updateTextureMatrix);
+  });
   
   const geometry = new THREE.PlaneGeometry(1, 1, 32, 32); 
   const material = new THREE.ShaderMaterial({
