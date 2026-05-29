@@ -514,8 +514,14 @@ nav.scrolled .roll-link::after {
   position: relative;
   padding: 0; 
   width: 100%;
-  height: 150vh; /* Keeps the deep scroll track */
-  background: var(--cream);
+  height: 150vh; 
+  background-color: var(--cream);
+  
+  /* 💥 CRITICAL FIX: The Ultimate Fallback */
+  background-image: url('https://res.cloudinary.com/duvvzolyf/image/upload/q_auto,f_auto,c_fill,w_1080,h_1620,g_auto/v1779873853/Karigari_This_piece_made_me_realise_the_art_of_slowing_down_and_recovery_sometimes_the_best_thi_s0oirk.jpg');
+  background-size: cover;
+  background-position: center;
+  
   overflow: hidden;
   border-top: 0.5px solid var(--faint-dark);
 }
