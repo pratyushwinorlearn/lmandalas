@@ -1457,4 +1457,36 @@ nav.scrolled .roll-link::after {
   .poster-section {
     height: 75vh; /* Cuts the massive 150vh height in half for mobile */
   }
+
+  /* ── FIX: ABOUT / EDITORIAL SECTION ON MOBILE ── */
+  .about-editorial {
+    padding: 80px 20px;
+    min-height: auto; 
+  }
+  
+  .editorial-dual-grid {
+    flex-direction: column; /* 💥 CRITICAL: Stacks the two halves vertically */
+    gap: 60px; /* Space between the top half and bottom half */
+  }
+
+  .col-right {
+    margin-top: 0 !important; /* 💥 CRITICAL: Kills the massive 200px desktop gap */
+  }
+
+  .editorial-col {
+    gap: 24px; /* Tighter space between the image and the text */
+  }
+
+  .editorial-text {
+    max-width: 100%; /* Lets the text use the full width of the phone */
+  }
+
+  .ed-title {
+    font-size: 36px; /* Scales the heading perfectly for mobile */
+  }
+
+  .ed-desc {
+    font-size: 15px; 
+    line-height: 1.6;
+  }
 }
